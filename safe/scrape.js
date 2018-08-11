@@ -20,26 +20,46 @@ request(url,(error,response,html)=>{
   {
     const $ = cheerio.load(html);
     // let id = $('#s-results-list-atf');//html() or text() is working
+	let retstr = "";
+	retstr +="{\"result\" : [";
+
     let limit = 6;
 	for(let itr=0;itr<limit;itr++)
 	{
 		//console.log("Iteration "+(itr+1)+": "+itr+"<br>");
+		
 		//let link = $(el).attr('href');//for links
 		let id = $('#result_'+itr+"").each((i,el) =>
 		{
-			//if not sponsored
-			if($(el).html().match(/^((?!\[Sponsored\]|Sponsored).)*$/img))
+			if($(el).html())
 			{
-				// console.log("<br>Image Link "+itr+"= "+$(el).find("img").attr("src"));//img
-				console.log($(el).html());
-				
+				retstr +="{";
+					//title
+						retstr +="\"title\" : "+"\""+$(el).find("h2").text()+"\""+",";
+					//img
+						retstr +="\"img\" : \""+$(el).find("img").attr("src")+"\",";
+					//price
+						retstr +="\"price\" : "+"\""+$(el).find("div > div > a > span").text().match(/\d+/img)+"\""+",";
+					//link
+						let l = $(el).find("div > a ").attr('href');
+						if(l[0]==='/')
+						{
+							let xyz = l.substr(l.indexOf('&url='),l.length);
+							retstr +="\"link\" : "+"\""+xyz+"\""+"";
+						}
+						else
+						{
+							retstr +="\"link\" : "+"\""+$(el).find("div > a ").attr('href')+"\""+"";
+						}
+				retstr +="},";
 				//console.log("<br>Price "+itr+"= "+$("span .currencyINR")[1].text());
-			}
-			
-			
 			//only on text .replace(/\s\s+/img,"")
-			
-		});
+			}		
+		});	
 	}
+	let ret = retstr.substr(0,retstr.length-1);
+	retstr = ret;
+	retstr +="]}";
+	console.log(retstr);
   }
 });

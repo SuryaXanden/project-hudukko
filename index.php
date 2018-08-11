@@ -24,7 +24,8 @@ if( isset($_GET['prod']) && isset($_GET['price']) )//After submitting
 	// $con = mysqli_connect('localhost','root','','aio');//local deployemnt credentials
 	//$con = mysqli_connect('sql105.epizy.com','epiz_22433247','HFbtjraKiIke','epiz_22433247_aio');//web deployemnt credentials
 	
-	require("gotonode.php");//Move to python
+	require("gotonode.php");//Move to NodeJS
+	require('./opapi/index.php');
 }
 ?>
 		</div>

@@ -1,12 +1,8 @@
 <?php
+echo $results;
+die();
+$json = json_decode($results,true);
 
-if(isset($_POST['scrapped']))
-{
-	
-}
 
-//parse
-
-//print
 
 ?>
