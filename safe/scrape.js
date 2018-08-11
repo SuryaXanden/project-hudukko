@@ -30,8 +30,11 @@ request(url,(error,response,html)=>{
 			//if not sponsored
 			if($(el).html().match(/^((?!\[Sponsored\]|Sponsored).)*$/img))
 			{
-				console.log("<br>Image "+itr+"= "+$(el).find("img").attr("src"));
+				// console.log("<br>Image Link "+itr+"= "+$(el).find("img").attr("src"));//img
+				console.log($(el).html());
 				
+				//console.log("<br>Price "+itr+"= "+$("span .currencyINR")[1].text());
+			}
 			
 			
 			//only on text .replace(/\s\s+/img,"")

@@ -1,0 +1,6 @@
+This file contains the pseudocode
+
+send_api-> [company,url][] -> python scrape -> json -> get_api -> results
+
+
+
