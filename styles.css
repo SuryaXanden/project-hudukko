@@ -1,0 +1,65 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	color:white;
+	background-color: #DCE35B;  /* fallback for old browsers */
+	background-color: -webkit-linear-gradient(to bottom, #45B649, #DCE35B);  /* Chrome 10-25, Safari 5.1-6 */
+	background-color: linear-gradient(to bottom, #45B649, #DCE35B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+a:link
+{
+	color:white;
+	text-decoration:none;
+	font-size:20px;
+}
+a:visited
+{
+	color:#84ea8b;
+	text-decoration:none;
+	font-size:18px;
+}
+a:hover
+{
+	color:teal;
+	text-decoration:none;
+	font-size:24px;
+}
+input
+{
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid white;
+  text-align:center;
+}
+table
+{
+	font-size:16px;
+	text-decoration:none;
+}
+.hudukko
+{
+  color:#D5AD6D;
+  background: -webkit-linear-gradient(transparent, transparent),-webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#results
+{
+	width: 50%;
+	border-radius: 64px;
+}
+#results>img
+{
+height: 32px;
+width: 32px;
+
+max-height: 32px;
+max-width: 32px;
+
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+}
