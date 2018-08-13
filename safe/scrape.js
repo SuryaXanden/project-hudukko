@@ -1,5 +1,3 @@
-//Generating the URL
-let url = 'https://www.amazon.in/s/ref=sr_st_price-asc-rank?keywords=';
 let qi=qp='';
 process.argv.forEach((val, index, array) =>
 {
@@ -8,58 +6,79 @@ process.argv.forEach((val, index, array) =>
 	if(index==3)
 			qp = val;
 });
-//set url
-url+=qi+" "+qp;
-
-//importing library
 const request = require('request');
 const cheerio = require('cheerio');
 
-request(url,(error,response,html)=>{
-  if(!error && response.statusCode === 200)
-  {
-    const $ = cheerio.load(html);
-    // let id = $('#s-results-list-atf');//html() or text() is working
-	let retstr = "";
-	retstr +="{\"result\" : [";
-
-    let limit = 6;
-	for(let itr=0;itr<limit;itr++)
+function sana(tempap)
+{
+	let tempaps = "";
+	for(let tempapch=0;tempapch<tempap.length;tempapch++)
 	{
-		//console.log("Iteration "+(itr+1)+": "+itr+"<br>");
-		
-		//let link = $(el).attr('href');//for links
-		let id = $('#result_'+itr+"").each((i,el) =>
+		if((tempap[tempapch]>=0 && tempap[tempapch]<=9) || (tempap[tempapch]=="," || tempap[tempapch]=="." || tempap[tempapch]=="-" || tempap[tempapch]==" " || tempap[tempapch]=="(" || tempap[tempapch]=="[" || tempap[tempapch]=="<"))
 		{
-			if($(el).html())
+			if(tempap[tempapch] == ",")
 			{
-				retstr +="{";
-					//title
-						retstr +="\"title\" : "+"\""+$(el).find("h2").text()+"\""+",";
-					//img
-						retstr +="\"img\" : \""+$(el).find("img").attr("src")+"\",";
-					//price
-						retstr +="\"price\" : "+"\""+$(el).find("div > div > a > span").text().match(/\d+/img)+"\""+",";
-					//link
-						let l = $(el).find("div > a ").attr('href');
-						if(l[0]==='/')
-						{
-							let xyz = l.substr(l.indexOf('&url='),l.length);
-							retstr +="\"link\" : "+"\""+xyz+"\""+"";
-						}
-						else
-						{
-							retstr +="\"link\" : "+"\""+$(el).find("div > a ").attr('href')+"\""+"";
-						}
-				retstr +="},";
-				//console.log("<br>Price "+itr+"= "+$("span .currencyINR")[1].text());
-			//only on text .replace(/\s\s+/img,"")
-			}		
-		});	
+				continue;
+			}
+			if(tempap[tempapch] == "-" || tempap[tempapch]=="(" || tempap[tempapch]=="[" || tempap[tempapch]=="<")
+			{
+				break;
+			}
+			tempaps += tempap[tempapch];							
+		}
 	}
-	let ret = retstr.substr(0,retstr.length-1);
-	retstr = ret;
-	retstr +="]}";
-	console.log(retstr);
-  }
-});
+	return tempaps;
+}
+
+let inj = qi+" "+qp;
+
+let retstr ="{\"result\" : [";
+let urla = 'https://www.amazon.in/s/ref=sr_st_price-asc-rank?keywords=';
+
+
+request(urla+inj,(error,response,html)=>
+{
+	if(!error && response.statusCode === 200)
+	{
+		const $ = cheerio.load(html);
+		let limit = 20;
+		for(let itr=0;itr<limit;itr++)
+		{
+			let id = $('#result_'+itr+"").each((i,el) =>
+			{
+				if($(el).html())
+				{
+					let tempap = $(el).find("div>div>div>a>span").text();				
+					let sanap = sana(tempap);			
+					sanap = sanap.trim();
+					if(sanap<=qp*1.25 && sanap>=0)
+					{
+						let tempat = $(el).find("h2").text();
+						let rgxp = new RegExp(qi, "ig");
+						if(tempat.match(rgxp))
+						{
+							let l = $(el).find("div > a ").attr('href'); 
+							if(l[0]!=='/')
+							{
+								retstr += "{\"price\":\""+sanap+"\",";//price
+								retstr += "\"title\" : "+"\""+tempat+"\""+",";//title
+								retstr += "\"link\" : "+"\""+l+"\",";//url
+								retstr += "\"img\" : \""+$(el).find("img").attr("src")+"\"},";//image							
+							}
+							else
+							{
+								++limit;								
+							}
+						}				
+					}				
+				}
+			});
+		}
+	}
+	
+	//in the end
+	retstr = retstr.substr(0,retstr.lastIndexOf(","));
+	retstr += "]}";
+	console.log(retstr);		
+}
+);
