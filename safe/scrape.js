@@ -33,7 +33,7 @@ function sana(tempap)
 
 let inj = qi+" "+qp;
 
-let retstr ="{";
+let retstr ="{\"results\" : [";
 let urla = 'https://www.amazon.in/s/ref=sr_st_price-asc-rank?keywords=';
 
 
@@ -61,7 +61,7 @@ request(urla+inj,(error,response,html)=>
 							let l = $(el).find("div > a ").attr('href'); 
 							if(l[0]!=='/')
 							{
-								retstr += "\"result"+result+++"\" : "+"{";
+								retstr += "{";
 								retstr += "\"price\":\""+sanap+"\",";//price
 								
 								const regex = /\"/gm;
@@ -86,8 +86,8 @@ request(urla+inj,(error,response,html)=>
 	//in the end
 	retstr = retstr.substr(0,retstr.lastIndexOf(","));
 	
-	retstr += "}";
-	if(retstr!=="}")
+retstr += "]}";
+if(retstr!=="]}")
 	console.log(retstr);		
 }
 );
