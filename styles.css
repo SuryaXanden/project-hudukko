@@ -7,25 +7,6 @@ body
 	background-color: -webkit-linear-gradient(to bottom, #45B649, #DCE35B);  /* Chrome 10-25, Safari 5.1-6 */
 	background-color: linear-gradient(to bottom, #45B649, #DCE35B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-
-a:link
-{
-	color:white;
-	text-decoration:none;
-	font-size:20px;
-}
-a:visited
-{
-	color:#84ea8b;
-	text-decoration:none;
-	font-size:18px;
-}
-a:hover
-{
-	color:teal;
-	text-decoration:none;
-	font-size:24px;
-}
 input
 {
   border: 0;
@@ -47,7 +28,7 @@ table
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-#results
+/*#results
 {
 	width: 50%;
 	border-radius: 64px;
@@ -62,4 +43,41 @@ max-width: 32px;
 
 margin: 0px 0px 0px 0px;
 padding: 0px 0px 0px 0px;
+}
+*/
+
+#results a:link
+{
+	color:white;
+	/*font-size:20px;*/
+}
+#results a:visited
+{
+	color:#84ea8b;
+	/*font-size:20px;*/
+}
+#results a:hover
+{
+	color:teal;
+	/*font-size:20px;*/
+}
+
+
+a:link
+{
+	color:white;
+	text-decoration:none;
+	font-size:20px;
+}
+a:visited
+{
+	color:#84ea8b;
+	text-decoration:none;
+	font-size:20px;
+}
+a:hover
+{
+	color:teal;
+	text-decoration:none;
+	font-size:20px;
 }

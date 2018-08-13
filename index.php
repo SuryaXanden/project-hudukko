@@ -1,31 +1,26 @@
 <?php
 require('ui.php');
-if( isset($_GET['prod']) && isset($_GET['price']) )//After submitting
+if( isset($_POST['prod']) && isset($_POST['price']) )//After submitting
 {
 	//Safety checks	
-	if( $_GET['price'] < 0 )//check1
+	if( $_POST['price'] <= 0 )//check1
 	{
 		die("<script>alert('Price must be a positive number!');</script>");
 	}
 	
-	if( strlen($_GET['prod']) < 2 )//check2
+	if( strlen($_POST['prod']) < 2 )//check2
 	{
 		die("<script>alert('Product name must be atleast 3 characters long!');</script>");
 	}
 	
 	//GET the user input
-	$prod = htmlspecialchars($_GET['prod']);
-	$price = htmlspecialchars($_GET['price']);
+	$prod = htmlspecialchars($_POST['prod']);
+	$price = htmlspecialchars($_POST['price']);
 	
 	//formatting the user's input to generate a query
 	$uq = $prod." ".$price;
 	
-	//connect to database
-	// $con = mysqli_connect('localhost','root','','aio');//local deployemnt credentials
-	//$con = mysqli_connect('sql105.epizy.com','epiz_22433247','HFbtjraKiIke','epiz_22433247_aio');//web deployemnt credentials
-	
 	require("gotonode.php");//Move to NodeJS
-	require('./opapi/index.php');
 }
 ?>
 		</div>

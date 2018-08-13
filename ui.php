@@ -20,9 +20,7 @@ background: #093028;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to top, #237A57, #093028);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to top, #237A57, #093028); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-	">	
-		
-
+	">
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 		<div class="navbar-header">
@@ -41,40 +39,28 @@ background: linear-gradient(to top, #237A57, #093028); /* W3C, IE 10+/ Edge, Fir
 		  </ul>
 		  </div>
 	  </div>
-	</nav>
-  
+	</nav>  
 </head>
-<!--option1
-background: #536976;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #292E49, #536976);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-option2
-background: #0F2027;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
--->
 
 
 <br><br>
 	<div class="container">
 		<div>
 			<a class="hudukko" onclick="hide()" href="#" style="font-size: 104px;">hudukko</a>
-			<form method = "GET">
-				<input type = "text" name = "prod" placeholder="Product name" required value="<?php
-				if(isset($_GET['prod']))
-					echo htmlspecialchars($_GET['prod']);
+			<form method = "POST">
+				<input type = "text" name = "prod" placeholder="Product name" autocomplete="on" required value="<?php
+				if(isset($_POST['prod']))
+					echo htmlspecialchars($_POST['prod']);
 				?>"
 				style="width:60%;font-size:28px;">
 				
-				<input type = "number" name = "price" placeholder="Price limit" step=1 value="<?php
-				if(isset($_GET['price']))
-					echo htmlspecialchars($_GET['price']);
+				<input type = "number" name = "price" placeholder="Price limit" step=1 autocomplete="on" required value="<?php
+				if(isset($_POST['price']))
+					echo htmlspecialchars($_POST['price']);
 				?>"
 				style="width:20%;font-size:28px;">
 				
-				<button type="submit" class="btn" style="height:32px;color:black;">
+				<button type="submit" class="btn" style="height:36px;color:black;">
 					<b>
 						&#x1F50D;
 					</b>
