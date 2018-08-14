@@ -1,5 +1,6 @@
 let qi=qp='';
 let result = 0;
+
 process.argv.forEach((val, index, array) =>
 {
 	if(index==2)
@@ -8,8 +9,14 @@ process.argv.forEach((val, index, array) =>
 		if(val!=0)
 			qp = val;
 });
+
 const request = require('request');
 const cheerio = require('cheerio');
+
+function gen()
+{
+	return(Math.floor(Math.random()*255));
+}
 
 function sana(tempap)
 {
@@ -64,7 +71,7 @@ function amazon()
 								if(l[0]!=='/')
 								{
 	retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
-									retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba(1,1,1,30%);\">";
+									retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"30%);\">";
 									retstr += "<a href=\""+l+"\">";
 											retstr += "<img src=\""+$(el).find("img").attr("src")+"\" style=\"width:128px;border-radius:32px;height:128px;\">";
 												
@@ -156,7 +163,7 @@ function snapdeal()
 				if(price[i]<=qp*1.15 && price[i]>=0)
 				{
 					retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
-						retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba(1,1,1,30%);\">";
+						retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"30%);\">";
 							retstr += "<a href=\""+dmp[i]+"\">";//url				
 								retstr += "<img src=\""+img[i]+"\" style=\"width:128px;border-radius:32px;height:128px;\">";//image			  
 								retstr += "<br><span id=\"title\" style=\"float:left\">"+String(tit[i]).substring(0,11)+"...</span>";//title
