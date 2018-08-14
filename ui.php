@@ -44,17 +44,17 @@ background: linear-gradient(to top, #237A57, #093028); /* W3C, IE 10+/ Edge, Fir
 
 
 <br><br>
-	<div class="container">
-		<div>
-			<a class="hudukko" onclick="hide()" href="#" style="font-size: 104px;">hudukko</a>
+	<div class="container" style="padding:0; margin:0;">
+		
+			<a class="hudukko" onclick="hide()" href="#" style="font-size: 80px;">hudukko</a>
 			<form method = "POST">
-				<input type = "text" name = "prod" placeholder="Product name" autocomplete="on" required value="<?php
+				<input type = "text" name = "prod" placeholder="Product name" autocomplete="off" required value="<?php
 				if(isset($_POST['prod']))
 					echo htmlspecialchars($_POST['prod']);
 				?>"
 				style="width:60%;font-size:28px;">
 				
-				<input type = "number" name = "price" placeholder="Price limit" step=1 autocomplete="on" required value="<?php
+				<input type = "number" name = "price" placeholder="Price limit" step=1 autocomplete="off" required value="<?php
 				if(isset($_POST['price']))
 					echo htmlspecialchars($_POST['price']);
 				?>"
@@ -66,5 +66,5 @@ background: linear-gradient(to top, #237A57, #093028); /* W3C, IE 10+/ Edge, Fir
 					</b>
 				</button>
 			</form>
-		</div>
+		
 	</div>		

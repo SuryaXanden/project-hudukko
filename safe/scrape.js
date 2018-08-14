@@ -1,6 +1,5 @@
-let qi=qp='';
 let result = 0;
-
+let qi=qp='';
 process.argv.forEach((val, index, array) =>
 {
 	if(index==2)
@@ -71,7 +70,7 @@ function amazon()
 								if(l[0]!=='/')
 								{
 	retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
-									retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"30%);\">";
+									retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 									retstr += "<a href=\""+l+"\">";
 											retstr += "<img src=\""+$(el).find("img").attr("src")+"\" style=\"width:128px;border-radius:32px;height:128px;\">";
 												
@@ -83,6 +82,7 @@ function amazon()
 											retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+sanap+"</span>";
 									retstr += "</a></div>";
 									console.log(retstr);
+									result++;
 								}
 							}
 						}
@@ -160,21 +160,30 @@ function snapdeal()
 			let retstr = "";
 			for(var i=0; i<4; i++)
 			{
-				if(price[i]<=qp*1.15 && price[i]>=0)
+				let rgxp = new RegExp(qi, "ig");				
+				if((price[i]<=qp*1.15 && price[i]>=0) && tit[i].match(rgxp))
 				{
 					retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
-						retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"30%);\">";
+						retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 							retstr += "<a href=\""+dmp[i]+"\">";//url				
-								retstr += "<img src=\""+img[i]+"\" style=\"width:128px;border-radius:32px;height:128px;\">";//image			  
+								retstr += "<img src=\""+img[i]+"\" style=\"width:128px;border-radius:32px;height:128px;\">";//image								
 								retstr += "<br><span id=\"title\" style=\"float:left\">"+String(tit[i]).substring(0,11)+"...</span>";//title
 								retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+price[i]+"</span>";
 					retstr += "</a></div>";
 					console.log(retstr);
+					result++;
 				}
 			}				
 		}
 	});
 }
 
-snapdeal();
-amazon();
+function call_all()
+{
+	amazon();
+	snapdeal();
+}
+
+call_all();
+
+//console.log("Items found: "+result);
