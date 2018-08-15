@@ -56,10 +56,8 @@ function amazon()
 				{
 					if($(el).html())
 					{
-						
-						let tempap = $(el).find("div>div>div>a>span").text();				
-						let sanap = sana(tempap);			
-						sanap = sanap.trim();
+						let tempap = $(el).find("div > div > div > a > span").text();				
+						let sanap = sana(tempap).trim();			
 						if(sanap<=qp*1.15 && sanap>=0)
 						{
 							let tempat = $(el).find("h2").text();
@@ -69,7 +67,7 @@ function amazon()
 								let l = $(el).find("div > a ").attr('href'); 
 								if(l[0]!=='/')
 								{
-	retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
+retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
 									retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 									retstr += "<a href=\""+l+"\">";
 											retstr += "<img src=\""+$(el).find("img").attr("src")+"\" style=\"width:128px;border-radius:32px;height:128px;\">";
@@ -103,7 +101,6 @@ function snapdeal()
 		{
 			const $ = cheerio.load(html);
 			
-			//image
 			var img = $("#products").map(function()
 			{
 				return $(this).find("img").map(function()
@@ -112,7 +109,6 @@ function snapdeal()
 				}).get();        
 			}).get();
 			
-			//title
 			var tit = $("#products").map(function()
 			{
 				return $(this).find("img").map(function()
@@ -121,7 +117,6 @@ function snapdeal()
 				}).get();        
 			}).get();
 			
-			//urls
 			var links = $("#products").map(function()
 			{
 				return $(this).find("a").map(function()
@@ -130,7 +125,6 @@ function snapdeal()
 				}).get();        
 			}).get();
 				
-			//price
 			var price = $("#products").map(function()
 			{
 				return $(this).find("span").map(function()
@@ -188,7 +182,6 @@ function flipkart()
 		{
 			const $ = cheerio.load(html);			
 			
-			//title
 			var title = $("#container > div > div > div > div > div > div > div > div > div > div > a").map(function()
 			{
 				return $(this).map(function()
@@ -199,7 +192,6 @@ function flipkart()
 				}).get();        
 			}).get();
 
-			//url
 			var url = $("#container > div > div > div > div > div > div > div > div > div > div > a").map(function()
 			{
 				return $(this).map(function()
@@ -233,9 +225,7 @@ function flipkart()
 			 l = String(getEntriesArry.next().value);		
 				l = l.substring(0,l.indexOf(","));
 			dmp.push(l);
-
 			
-			//price
 			var price = $("#container > div > div > div > div > div > div > div > div > div > div > a").map(function()
 			{
 				return $(this).map(function()
