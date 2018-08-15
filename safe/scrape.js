@@ -173,17 +173,125 @@ function snapdeal()
 					console.log(retstr);
 					result++;
 				}
-			}				
+			}
 		}
 	});
 }
+
+function flipkart()
+{
+	let urlf = 'https://www.flipkart.com/search?sort=relevance&q=';
+
+	request(urlf+inj,(error,response,html)=>
+	{
+		if(!error && response.statusCode === 200)
+		{
+			const $ = cheerio.load(html);			
+			
+			//title
+			var title = $("#container > div > div > div > div > div > div > div > div > div > div > a").map(function()
+			{
+				return $(this).map(function()
+				{
+					let tit = $(this).attr("title");//Title
+					if(tit !== undefined)
+						return tit;
+				}).get();        
+			}).get();
+
+			//url
+			var url = $("#container > div > div > div > div > div > div > div > div > div > div > a").map(function()
+			{
+				return $(this).map(function()
+				{
+					let lnk = $(this).attr("href");//link
+					if(lnk !== undefined || lnk != "")
+						return "https://www.flipkart.com"+lnk.trim();
+				}).get();        
+			}).get();
+			
+			var link = new Set(url);
+			
+			var getEntriesArry = link.entries();
+			
+			let dmp = [];
+			let l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+
+			
+			//price
+			var price = $("#container > div > div > div > div > div > div > div > div > div > div > a").map(function()
+			{
+				return $(this).map(function()
+				{
+					let p = $(this).first().text();//Price
+					if(p.length>1)
+					{
+						return p.substring(1,p.length).trim().replace(",","");
+					}
+				}).get();        
+			}).get();
+			
+			let p = [];
+			for(let i=3;i<11;i++)
+			{
+				if( i%2 == 0 )
+				{
+					if(price[i].indexOf("₹")>-1)
+					{
+						let san = price[i].substring(0,price[i].indexOf("₹"));
+						p.push(san);
+					}
+					else
+					{
+						p.push(price[i]);
+					}
+				}
+			}
+
+			let retstr = "";
+			for(var i=0; i<4; i++)
+			{
+				let rgxp = new RegExp(qi, "ig");				
+				if((p[i]<=qp*1.15 && p[i]>=0) && title[i].match(rgxp))
+				{
+					retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
+						retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
+							retstr += "<a href=\""+dmp[i]+"\">";//url				
+								retstr += "<img src=\"https://www.flipkart.com/favicon.ico\" style=\"width:128px;border-radius:32px;height:128px;\">";//image								
+								retstr += "<br><span id=\"title\" style=\"float:left\">"+String(title[i]).substring(0,11)+"...</span>";//title
+								retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+p[i]+"</span>";
+					retstr += "</a></div>";
+					console.log(retstr);
+					result++;
+				}
+			}	
+		}
+	});
+}
+
 
 function call_all()
 {
 	amazon();
 	snapdeal();
+	flipkart();
 }
 
 call_all();
-
-//console.log("Items found: "+result);
