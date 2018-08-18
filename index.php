@@ -23,9 +23,6 @@ if( isset($_POST['prod']) && isset($_POST['price']) )//After submitting
 	require("gotonode.php");//Move to NodeJS
 }
 ?>
-		</div>
-	</div>
-</body>
 <!-- Instructions for usage -->
 <footer align="center">
 	<div id="help" style="display:none;">

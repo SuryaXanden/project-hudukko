@@ -68,7 +68,7 @@ function amazon()
 								if(l[0]!=='/')
 								{
 retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
-									retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
+									retstr += "<div class=\"col-xs-4\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 									retstr += "<a href=\""+l+"\">";
 											retstr += "<img src=\""+$(el).find("img").attr("src")+"\" style=\"width:128px;border-radius:32px;height:128px;\">";
 												
@@ -158,7 +158,7 @@ function snapdeal()
 				if((price[i]<=qp*1.15 && price[i]>=0) && tit[i].match(rgxp))
 				{
 					retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
-						retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
+						retstr += "<div class=\"col-xs-4\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 							retstr += "<a href=\""+dmp[i]+"\">";//url				
 								retstr += "<img src=\""+img[i]+"\" style=\"width:128px;border-radius:32px;height:128px;\">";//image								
 								retstr += "<br><span id=\"title\" style=\"float:left\">"+String(tit[i]).substring(0,11)+"...</span>";//title
@@ -262,7 +262,7 @@ function flipkart()
 				if((p[i]<=qp*1.15 && p[i]>=0) && title[i].match(rgxp))
 				{
 					retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
-						retstr += "<div class=\"col-xs-3\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
+						retstr += "<div class=\"col-xs-4\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 							retstr += "<a href=\""+dmp[i]+"\">";//url				
 								retstr += "<img src=\"https://www.flipkart.com/favicon.ico\" style=\"width:128px;border-radius:32px;height:128px;\">";//image								
 								retstr += "<br><span id=\"title\" style=\"float:left\">"+String(title[i]).substring(0,11)+"...</span>";//title
@@ -276,12 +276,11 @@ function flipkart()
 	});
 }
 
-
 function call_all()
 {
-	amazon();
 	snapdeal();
 	flipkart();
+	amazon();
 }
 
 call_all();
