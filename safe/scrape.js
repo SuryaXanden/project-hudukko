@@ -9,6 +9,14 @@ process.argv.forEach((val, index, array) =>
 			qp = val;
 });
 
+Array.prototype.sortBy = function(p) {
+  return this.slice(0).sort(function(a,b) {
+    return (a[p] > b[p]) ? 1 : (a[p] < b[p]) ? -1 : 0;
+  });
+}
+
+let objs = [];
+
 const request = require('request');
 const cheerio = require('cheerio');
 
@@ -67,7 +75,7 @@ function amazon()
 								let l = $(el).find("div > a ").attr('href'); 
 								if(l[0]!=='/')
 								{
-retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
+									retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
 									retstr += "<div class=\"col-xs-4\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 									retstr += "<a href=\""+l+"\">";
 											retstr += "<img src=\""+$(el).find("img").attr("src")+"\" style=\"width:128px;border-radius:32px;height:128px;\">";
@@ -80,7 +88,8 @@ retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
 											retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+sanap+"</span>";
 									retstr += "</a></div>";
 									console.log(retstr);
-									result++;
+									// objs.push({amt:(sanap),htmlstr:(retstr)});
+									// result++;
 								}
 							}
 						}
@@ -165,7 +174,8 @@ function snapdeal()
 								retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+price[i]+"</span>";
 					retstr += "</a></div>";
 					console.log(retstr);
-					result++;
+					//objs.push({amt:price[i],htmlstr:retstr});
+					//result++;		
 				}
 			}
 		}
@@ -269,18 +279,23 @@ function flipkart()
 								retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+p[i]+"</span>";
 					retstr += "</a></div>";
 					console.log(retstr);
-					result++;
+					// objs.push({amt:p[i],htmlstr:retstr});
+					// result++;
 				}
 			}	
 		}
 	});
 }
 
-function call_all()
-{
-	snapdeal();
-	flipkart();
-	amazon();
-}
+snapdeal();
+flipkart();
+amazon();
 
-call_all();
+/*
+objs.forEach((i)=>{
+	console.log(i.htmlstr);
+});*/
+
+//objs = objs.sortBy('amt');
+
+//console.log(objs);
