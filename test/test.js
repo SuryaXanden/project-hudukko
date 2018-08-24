@@ -5,12 +5,32 @@ Array.prototype.sortBy = function(p) {
 }
 
 let objs = [];
-let num1 = 0;
-for(let i=0;i<10;i++)
+
+function fun1()
 {
-	num1 = Math.floor(Math.random() * 10);//rand num
-	objs.push({price:num1,html:"xyz"+num1});
+	let num1 = 0;
+	for(let i=0;i<10;i++)
+	{
+		num1 = Math.floor(Math.random() * 10);//rand num <10
+		num2 = Math.floor(Math.random() * 999);//rand num <10
+		objs.push({price:num1,html:"xyz"+num2});
+	}
+
 }
+
+function fun2()
+{
+	let num1 = 0;
+	for(let i=0;i<10;i++)
+	{
+		num1 = i;
+		objs.push({price:num1,html:"abc"+num1});
+	}
+
+}
+
+fun1();
+fun2();
 
 objs = objs.sortBy('price');
 

@@ -17,6 +17,22 @@ Array.prototype.sortBy = function(p) {
 
 let objs = [];
 
+function pta(amt,html,callback)//push to array
+{
+	objs.push({"amt":amt,"htmlstr":(html).toString()});
+	callback();
+}
+
+function sap()//sort and print
+{
+	objs = objs.sortBy('amt');
+	console.log(objs);
+		// objs.forEach((i)=>
+	// {
+		// console.log(i.htmlstr);
+	// });
+}
+
 const request = require('request');
 const cheerio = require('cheerio');
 
@@ -78,7 +94,7 @@ function amazon()
 									retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
 									retstr += "<div class=\"col-xs-4\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 									retstr += "<a href=\""+l+"\">";
-											retstr += "<img src=\""+$(el).find("img").attr("src")+"\" style=\"width:128px;border-radius:32px;height:128px;\">";
+											retstr += "<img src=\""+$(el).find("img").attr("src")+"\" style=\"width:30%;border-radius:32px;height:16%;\">";
 												
 											const regex = /\"\'/gm;
 											const subst = `\'`;
@@ -87,8 +103,9 @@ function amazon()
 											retstr += "<br><span id=\"title\" style=\"float:left\">"+tempat.substr(0,11)+"...</span>";
 											retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+sanap+"</span>";
 									retstr += "</a></div>";
-									console.log(retstr);
-									// objs.push({amt:(sanap),htmlstr:(retstr)});
+									// console.log(retstr);
+									pta(sanap,retstr,sap);
+									// objs.push({amt:(sanap),htmlstr:(retstr).toString()});
 									// result++;
 								}
 							}
@@ -169,13 +186,15 @@ function snapdeal()
 					retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
 						retstr += "<div class=\"col-xs-4\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 							retstr += "<a href=\""+dmp[i]+"\">";//url				
-								retstr += "<img src=\""+img[i]+"\" style=\"width:128px;border-radius:32px;height:128px;\">";//image								
+								retstr += "<img src=\""+img[i]+"\" style=\"width:30%;border-radius:32px;height:16%;\">";//image								
 								retstr += "<br><span id=\"title\" style=\"float:left\">"+String(tit[i]).substring(0,11)+"...</span>";//title
 								retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+price[i]+"</span>";
 					retstr += "</a></div>";
-					console.log(retstr);
-					//objs.push({amt:price[i],htmlstr:retstr});
-					//result++;		
+					// console.log(retstr);
+					pta(price[i],retstr,sap);
+					// objs.push({amt:price[i],htmlstr:(retstr).toString()});
+						// console.log("Done");
+					//result++;
 				}
 			}
 		}
@@ -274,12 +293,19 @@ function flipkart()
 					retstr = "<div id=\"results\" class=\"row\" style=\"width:100%;\">";
 						retstr += "<div class=\"col-xs-4\" style=\"background-color:rgba("+gen()+","+gen()+","+gen()+","+"60%);\">";
 							retstr += "<a href=\""+dmp[i]+"\">";//url				
-								retstr += "<img src=\"https://www.flipkart.com/favicon.ico\" style=\"width:128px;border-radius:32px;height:128px;\">";//image								
+								retstr += "<img src=\"https://www.flipkart.com/favicon.ico\" style=\"width:30%;border-radius:32px;height:16%;\">";//image								
 								retstr += "<br><span id=\"title\" style=\"float:left\">"+String(title[i]).substring(0,11)+"...</span>";//title
 								retstr += "<span id=\"price\" style=\"float:right\">Rs&Tab;"+p[i]+"</span>";
 					retstr += "</a></div>";
-					console.log(retstr);
-					// objs.push({amt:p[i],htmlstr:retstr});
+					// console.log(retstr);					
+					// return new Promise((resolve,reject) =>
+					// {
+						// pta();
+						// resolve();
+					// });
+					pta(p[i],retstr,sap);
+					// await objs.push({amt:p[i],htmlstr:(retstr).toString()});
+						// console.log("Done");
 					// result++;
 				}
 			}	
@@ -290,12 +316,3 @@ function flipkart()
 snapdeal();
 flipkart();
 amazon();
-
-/*
-objs.forEach((i)=>{
-	console.log(i.htmlstr);
-});*/
-
-//objs = objs.sortBy('amt');
-
-//console.log(objs);
