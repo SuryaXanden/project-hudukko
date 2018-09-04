@@ -1,0 +1,65 @@
+body
+{
+	color:white;
+	background-color:black;
+}
+input
+{
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid white;
+  text-align:center;
+  color:white
+}
+
+table
+{
+	font-size:16px;
+	text-decoration:none;
+}
+
+.hudukko
+{
+  color:#D5AD6D;
+  background: -webkit-linear-gradient(transparent, transparent),-webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#results a:link
+{
+	color:white;
+}
+
+#results a:visited
+{
+	color:#84ea8b;
+}
+
+#results a:hover
+{
+	color:teal;
+}
+
+a:link
+{
+	color:white;
+	text-decoration:none;
+	font-size:20px;
+}
+
+a:visited
+{
+	color:#84ea8b;
+	text-decoration:none;
+	font-size:20px;
+}
+
+a:hover
+{
+	color:teal;
+	text-decoration:none;
+	font-size:20px;
+}

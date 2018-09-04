@@ -1,0 +1,42 @@
+<head>
+	<title>hudukko</title>
+	<center>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="help.js"></script>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span> 
+	  </button>
+	  <a class="navbar-brand hudukko" href="#" >hudukko</a>
+	</div>
+	<div class="collapse navbar-collapse" id="myNavbar">
+	  <ul class="nav navbar-nav">
+		<li class="active">
+		<li><a href="about.html" style="color:grey;">About</a></li>
+		<li><a href="mailto:hudukko@gmail.com" style="color:grey;">Contact us</a>
+	  </ul>
+	  </div>
+  </div>
+</nav>
+<body style="background-color:black;">
+<div>
+	<a class="hudukko" href="#" style="font-size: 80px;">hudukko</a>
+	<form method = "POST">
+		<input type = "text" name = "prod" placeholder="Product name" autofocus autocomplete="off" required value="" style="width:40%;font-size:28px;">
+		
+		<input type = "number" name = "price" placeholder="Price limit" step=1 autocomplete="off" required value="" style="width:15%;font-size:28px;">		
+		<button type="submit" class="btn" style="height:36px;color:black;">
+			<b>&#x1F50D;</b>
+		</button>
+	</form>
+</div>
+<div id="results"></div>
