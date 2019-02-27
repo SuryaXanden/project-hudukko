@@ -284,3 +284,83 @@ app.post('/', function(req, res)
 	res.end(op);
 });
 app.listen(1997);
+
+
+
+const rp = require('request-promise');
+const cheerio = require('cheerio');
+let qi = "shoes";
+let qp = "2000";
+async function snapdeal()
+{
+	let urls = 'https://www.snapdeal.com/search?sort=rlvncy&keyword=';
+	return rp(urls+"shoes 2000").then(async (html) =>
+	{
+			const $ = cheerio.load(html);
+			
+			var img = $("#products").map(function()
+			{
+				return $(this).find("img").map(function()
+				{
+					return $(this).attr("src");
+				}).get();        
+			}).get();
+			
+			var tit = $("#products").map(function()
+			{
+				return $(this).find("img").map(function()
+				{
+					return $(this).attr("title");
+				}).get();        
+			}).get();
+			
+			var links = $("#products").map(function()
+			{
+				return $(this).find("a").map(function()
+				{
+					return $(this).attr("href");
+				}).get();        
+			}).get();
+				
+			var price = $("#products").map(function()
+			{
+				return $(this).find("span").map(function()
+				{
+					return $(this).attr("data-price");
+				}).get();        
+			}).get();
+				
+			var link = new Set(links);
+			
+			var getEntriesArry = link.entries();
+			
+			let dmp = [];
+			let l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+			 l = String(getEntriesArry.next().value);		
+				l = l.substring(0,l.indexOf(","));
+			dmp.push(l);
+			
+			let retstr = [];
+			for(var i=0; i<4; i++)
+			{
+				if((price[i]<=qp*1.15 && price[i]>=0))
+				{
+				               retstr.push( dmp[i]	+
+								img[i]	+			
+								String(tit[i]).substring(0,11) +
+								price[i]);
+				}
+			}
+			return await retstr;
+	});
+}
+
+snapdeal().then(i => console.log(i))
